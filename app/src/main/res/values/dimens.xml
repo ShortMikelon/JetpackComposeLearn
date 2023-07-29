@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="medium_padding">10dp</dimen>
+    <dimen name="large_padding">20dp</dimen>
+
+    <dimen name="large_elevation">10dp</dimen>
+
+    <dimen name="large_font_size">25sp</dimen>
+</resources>

@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="users_count">Users count: %1$d</string>
+</resources>
