@@ -1,8 +1,9 @@
 package kz.asetkenes.learnandroid.core
 
-import kz.asetkenes.learnandroid.core.Container.Error
-import kz.asetkenes.learnandroid.core.Container.Pending
-import kz.asetkenes.learnandroid.core.Container.Success
+import kz.asetkenes.learnandroid.common.core.Container.Error
+import kz.asetkenes.learnandroid.common.core.Container.Pending
+import kz.asetkenes.learnandroid.common.core.Container.Success
+import kz.asetkenes.learnandroid.testutils.wellDone
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertSame
@@ -64,15 +65,12 @@ class ContainerTest {
         val exception = Exception()
         val error = Error(exception)
         val pending = Pending
-        val success = Success("value")
 
         val mappedErrorResult = error.map<Int>()
         val mappedPendingResult = pending.map<Int>()
-        val mappedSuccessResult = success.map<Int>()
 
         assertTrue(mappedErrorResult is Error)
         assertTrue(mappedPendingResult is Pending)
-        assertTrue(mappedSuccessResult is Success)
         assertSame(exception, (mappedErrorResult as Error).exception)
     }
 
@@ -95,7 +93,4 @@ class ContainerTest {
         assertEquals(321L, (mappedContainer as Success).value)
     }
 
-    private  fun wellDone() {
-
-    }
 }

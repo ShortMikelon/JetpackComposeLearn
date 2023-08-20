@@ -1,4 +1,4 @@
-package kz.asetkenes.learnandroid.core
+package kz.asetkenes.learnandroid.common.core
 
 import java.lang.Exception
 import java.lang.IllegalStateException
