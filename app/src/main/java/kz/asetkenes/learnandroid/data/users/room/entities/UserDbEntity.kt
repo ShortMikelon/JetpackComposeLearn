@@ -5,7 +5,7 @@ import androidx.room.Entity
 import androidx.room.Index
 import androidx.room.PrimaryKey
 import kz.asetkenes.learnandroid.domain.users.entities.User
-import kz.asetkenes.learnandroid.domain.users.entities.UserSignUpData
+import kz.asetkenes.learnandroid.domain.signup.entities.SignUpEntity
 import kz.asetkenes.learnandroid.utils.convertStringToTimestamp
 import kz.asetkenes.learnandroid.utils.convertTimestampToString
 
@@ -46,7 +46,7 @@ data class UserDbEntity(
                 createdAt = convertTimestampToString(user.createdAt),
             )
 
-        fun fromUserSignUpData(signUpData: UserSignUpData): UserDbEntity =
+        fun fromUserSignUpData(signUpData: SignUpEntity): UserDbEntity =
             UserDbEntity(
                 id = 0,
                 name = signUpData.name,

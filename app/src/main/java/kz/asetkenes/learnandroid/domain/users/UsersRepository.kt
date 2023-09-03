@@ -2,11 +2,11 @@ package kz.asetkenes.learnandroid.domain.users
 
 import kz.asetkenes.learnandroid.domain.users.entities.User
 import kz.asetkenes.learnandroid.domain.signin.entities.UserSignInData
-import kz.asetkenes.learnandroid.domain.users.entities.UserSignUpData
+import kz.asetkenes.learnandroid.domain.signup.entities.SignUpEntity
 
 interface UsersRepository {
 
-    suspend fun signUp(signUpData: UserSignUpData)
+    suspend fun signUp(signUpData: SignUpEntity)
 
     suspend fun findUserById(id: Long): User?
 

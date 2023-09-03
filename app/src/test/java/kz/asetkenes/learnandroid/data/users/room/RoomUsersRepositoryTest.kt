@@ -11,8 +11,10 @@ import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
 import kz.asetkenes.learnandroid.data.settings.AppSettings
 import kz.asetkenes.learnandroid.data.users.room.entities.UserDbEntity
-import kz.asetkenes.learnandroid.domain.users.entities.User
-import kz.asetkenes.learnandroid.domain.users.entities.UserSignUpData
+import kz.asetkenes.learnandroid.domain.signup.entities.SignUpEntity
+import kz.asetkenes.learnandroid.domain.signup.exceptions.EmptyFieldException
+import kz.asetkenes.learnandroid.domain.signup.exceptions.PasswordMismatchException
+import kz.asetkenes.learnandroid.testutils.wellDone
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Rule
@@ -34,13 +36,14 @@ class RoomUsersRepositoryTest {
 
 
     @Test
-    fun createUserCallDao() = runTest {
+    fun signUpValidDataCreateUser() = runTest {
         val source = createRepository()
         coEvery { usersDao.createUser(any()) } just runs
-        val signUpData = UserSignUpData(
+        val signUpData = SignUpEntity(
             name = "name",
             email = "email",
             password = "password",
+            repeatPassword = "password",
             aboutMe = "aboutMe",
             dateOfBirthday = 1L,
         )
@@ -50,6 +53,40 @@ class RoomUsersRepositoryTest {
         coVerify(exactly = 1) {
             usersDao.createUser(UserDbEntity.fromUserSignUpData(signUpData))
         }
+    }
+
+    @Test(expected = EmptyFieldException::class)
+    fun signUpEmptyFieldInSignUpDataThrowEmptyFieldException() = runTest {
+        val source = createRepository()
+        val signUpData = SignUpEntity(
+            name = "",
+            email = "",
+            password = "password",
+            repeatPassword = "password",
+            aboutMe = "aboutMe",
+            dateOfBirthday = 1L,
+        )
+
+        source.signUp(signUpData)
+
+        wellDone()
+    }
+
+    @Test(expected = PasswordMismatchException::class)
+    fun signUpMismatchPasswordInSignUpDataThrowEmptyFieldException() = runTest {
+        val source = createRepository()
+        val signUpData = SignUpEntity(
+            name = "name",
+            email = "email",
+            password = "password",
+            repeatPassword = "pasdsfsword",
+            aboutMe = "aboutMe",
+            dateOfBirthday = 1L,
+        )
+
+        source.signUp(signUpData)
+
+        wellDone()
     }
 
     @Test
@@ -91,15 +128,6 @@ class RoomUsersRepositoryTest {
         assertEquals(userDbEntities, users2)
         coVerify(exactly = 1) { usersDao.getAllUsers() }
     }
-
-    private fun createUserEntity(id: Long = 1L): User = User(
-        id = id,
-        name = "name",
-        email = "email $id",
-        aboutMe = "aboutMe",
-        dateBirthday = 1L,
-        createdAt = 1L
-    )
 
     private fun createUserDbEntity(id: Long = 1L): UserDbEntity =
         UserDbEntity(
