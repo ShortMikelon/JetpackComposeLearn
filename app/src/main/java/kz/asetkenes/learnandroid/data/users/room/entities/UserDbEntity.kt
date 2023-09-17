@@ -21,7 +21,7 @@ data class UserDbEntity(
     @ColumnInfo(collate = ColumnInfo.NOCASE) val email: String,
     @ColumnInfo(name = "password") val password: String,
     @ColumnInfo(name = "about_me") val aboutMe: String,
-    @ColumnInfo(name = "date_birthday") val dateBirthday: Long,
+    @ColumnInfo(name = "date_birthday") val dateBirthday: String,
     @ColumnInfo(name = "created_at") val createdAt: String = "CURRENT_TIMESTAMP"
 ) {
 
@@ -30,7 +30,7 @@ data class UserDbEntity(
         name = name,
         email = email,
         aboutMe = aboutMe,
-        dateBirthday = dateBirthday,
+        dateBirthday = convertStringToTimestamp(dateBirthday),
         createdAt = convertStringToTimestamp(createdAt),
     )
 
@@ -42,8 +42,8 @@ data class UserDbEntity(
                 email = user.email,
                 password = password,
                 aboutMe = user.aboutMe,
-                dateBirthday = user.dateBirthday,
-                createdAt = convertTimestampToString(user.createdAt),
+                dateBirthday = convertTimestampToString(user.dateBirthday, onlyDate = true),
+                createdAt = convertTimestampToString(user.createdAt, onlyDate = true),
             )
 
         fun fromUserSignUpData(signUpData: SignUpEntity): UserDbEntity =
@@ -53,7 +53,8 @@ data class UserDbEntity(
                 email = signUpData.email,
                 password = signUpData.password,
                 aboutMe = signUpData.aboutMe,
-                dateBirthday = signUpData.dateOfBirthday
+                dateBirthday = convertTimestampToString(signUpData.dateOfBirthday, onlyDate = true),
+                createdAt = convertTimestampToString(System.currentTimeMillis(), onlyDate = true)
             )
     }
 }

@@ -11,7 +11,7 @@ import kz.asetkenes.learnandroid.data.users.room.UsersDao
 import kz.asetkenes.learnandroid.data.users.room.entities.UserDbEntity
 
 @Database(
-    version = 2,
+    version = 3,
     entities = [
         UserDbEntity::class,
         ArticleDbEntity::class,

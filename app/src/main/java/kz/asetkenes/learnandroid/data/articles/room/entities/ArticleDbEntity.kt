@@ -6,6 +6,8 @@ import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import kz.asetkenes.learnandroid.domain.articles.entities.ArticleEntity
 import kz.asetkenes.learnandroid.data.users.room.entities.UserDbEntity
+import kz.asetkenes.learnandroid.utils.convertStringToTimestamp
+import kz.asetkenes.learnandroid.utils.convertTimestampToString
 
 @Entity(
     tableName = "articles",
@@ -19,14 +21,13 @@ import kz.asetkenes.learnandroid.data.users.room.entities.UserDbEntity
     ]
 )
 data class ArticleDbEntity(
-    @PrimaryKey val id: Long,
-    val name: String,
-    @ColumnInfo(name = "author_id")
-    val authorId: Long,
-    val description: String,
-    val body: String,
-    @ColumnInfo(name = "created_at")
-    val createdAt: Long,
+    @PrimaryKey
+    @ColumnInfo(name = "id") val id: Long,
+    @ColumnInfo(name = "name")val name: String,
+    @ColumnInfo(name = "author_id") val authorId: Long,
+    @ColumnInfo(name = "description")val description: String,
+    @ColumnInfo(name = "body") val body: String,
+    @ColumnInfo(name = "created_at") val createdAt: String,
 ) {
 
     fun toArticle() = ArticleEntity(
@@ -35,7 +36,7 @@ data class ArticleDbEntity(
         authorId = authorId,
         description = description,
         body = body,
-        createdAt = createdAt,
+        createdAt = convertStringToTimestamp(createdAt),
     )
 
     companion object {
@@ -45,7 +46,7 @@ data class ArticleDbEntity(
             authorId = article.authorId,
             description = article.description,
             body = article.body,
-            createdAt = article.createdAt,
+            createdAt = convertTimestampToString(article.createdAt, onlyDate = true),
         )
     }
 }

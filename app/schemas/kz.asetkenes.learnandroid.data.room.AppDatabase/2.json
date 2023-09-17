@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "9669640891d707e32ba50af3a5089167",
+    "identityHash": "fcc6fb6d74d780377a0b4b2c5b970124",
     "entities": [
       {
         "tableName": "users",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, `email` TEXT NOT NULL COLLATE NOCASE, `password` TEXT NOT NULL, `about_me` TEXT NOT NULL, `date_birthday` INTEGER NOT NULL, `created_at` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, `email` TEXT NOT NULL COLLATE NOCASE, `password` TEXT NOT NULL, `about_me` TEXT NOT NULL, `date_birthday` TEXT NOT NULL, `created_at` TEXT NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -41,7 +41,7 @@
           {
             "fieldPath": "dateBirthday",
             "columnName": "date_birthday",
-            "affinity": "INTEGER",
+            "affinity": "TEXT",
             "notNull": true
           },
           {
@@ -222,7 +222,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '9669640891d707e32ba50af3a5089167')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'fcc6fb6d74d780377a0b4b2c5b970124')"
     ]
   }
 }
