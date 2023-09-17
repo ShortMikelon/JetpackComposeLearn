@@ -9,7 +9,7 @@ private const val DATE_FORMAT = "yyyy-MM-dd"
 private const val TIME_FORMAT = "HH:mm"
 
 fun convertStringToTimestamp(dateString: String): Long {
-    val dateFormat = SimpleDateFormat(DATETIME_FORMAT, Locale.getDefault())
+    val dateFormat = SimpleDateFormat(DATE_FORMAT, Locale.getDefault())
     val date = dateFormat.parse(dateString)
     return date?.time ?: 0
 }

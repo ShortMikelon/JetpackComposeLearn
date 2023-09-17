@@ -1,4 +1,15 @@
 <resources>
     <string name="app_name">My Application</string>
     <string name="users_count">Users count: %1$d</string>
+    <string name="empty_field">Empty field</string>
+    <string name="mismatch_password">Mismatch Password</string>
+    <string name="date_of_birthday_not_selected">Date of birthday not selected</string>
+    <string name="password">password</string>
+    <string name="repeat_password">repeat password</string>
+    <string name="date_of_birthday">date of birthday</string>
+    <string name="not_selected">Not selected</string>
+    <string name="about_me">about me</string>
+    <string name="email">email</string>
+    <string name="name">name</string>
+    <string name="sign_up">Sign up</string>
 </resources>
