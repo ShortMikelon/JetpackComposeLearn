@@ -22,13 +22,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import kz.asetkenes.learnandroid.R
+import kz.asetkenes.learnandroid.common.androidCore.viewModelCreator
 import kz.asetkenes.learnandroid.domain.users.entities.User
 
 @Composable
 fun UsersScreen(
-    viewModel: UsersViewModel = viewModel(factory = UsersViewModel.Factory)
+    viewModel: UsersViewModel = viewModelCreator()
 ) {
     val uiState by viewModel.uiState.collectAsState()
 
