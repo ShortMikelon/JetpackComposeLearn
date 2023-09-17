@@ -25,7 +25,7 @@ fun SplashScreen(navController: NavController) {
 
     LaunchedEffect(Unit) {
         navController.navigate(MainDestination.SIGN_IN_DESTINATION) {
-            popUpTo(MainDestination.SIGN_IN_DESTINATION) {
+            popUpTo(MainDestination.SPLASH_DESTINATION) {
                 inclusive = true
             }
         }

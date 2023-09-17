@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import kz.asetkenes.learnandroid.common.androidCore.LogCatLogger
 import kz.asetkenes.learnandroid.ui.navigation.MainDestination
 import kz.asetkenes.learnandroid.ui.screens.signup.SignUpScreen
 import kz.asetkenes.learnandroid.ui.screens.splash.SplashScreen
@@ -22,6 +23,8 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         ApplicationScope.init(applicationContext)
+
+        val logger = LogCatLogger()
 
         setContent {
             MyApplicationTheme {
@@ -39,7 +42,7 @@ class MainActivity : ComponentActivity() {
                         }
 
                         composable(MainDestination.SIGN_IN_DESTINATION) {
-                            SignUpScreen()
+                            SignUpScreen(navController = navController, logger = logger)
                         }
 
                         composable(MainDestination.HOME_DESTINATION) {
